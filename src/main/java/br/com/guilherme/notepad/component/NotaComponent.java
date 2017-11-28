@@ -14,21 +14,20 @@ public class NotaComponent {
     NotaRepository notaRepository;
 
     public void salvar(Nota nota) {
-        List<Nota>  notas = notaRepository.findByTitulo(nota.getTitulo());
-        if(!notas.isEmpty()) {
-            nota.setId(notas.get(0).getId());
+        Nota notaS = notaRepository.findByTitulo(nota.getTitulo());
+        if(notaS != null) {
+            nota.setId(notaS.getId());
         }
         notaRepository.save(nota);
     }
 
     public Nota buscarNota(String titulo) {
-        Nota nota;
-        List<Nota> notas = notaRepository.findByTitulo(titulo);
-        if(notas.isEmpty()) {
+        Nota nota = notaRepository.findByTitulo(titulo);
+        if(nota != null) {
             return new Nota();
         }
         else {
-            return notas.get(0);
+            return nota;
         }
     }
 
@@ -37,10 +36,9 @@ public class NotaComponent {
     }
 
     public void apagar(String titulo) {
-        Nota nota;
-        List<Nota> notas = notaRepository.findByTitulo(titulo);
-        if(!notas.isEmpty()) {
-            notaRepository.delete(notas.get(0));
+        Nota nota = notaRepository.findByTitulo(titulo);
+        if(nota != null) {
+            notaRepository.delete(nota);
         }
     }
 
