@@ -23,12 +23,12 @@ public class NotaComponent {
 
     public Nota buscarNota(String titulo) {
         Nota nota = notaRepository.findByTitulo(titulo);
+
         if(nota != null) {
-            return new Nota();
-        }
-        else {
             return nota;
         }
+
+        return new Nota();
     }
 
     public List<Nota> buscarTodos() {
